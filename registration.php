@@ -1,8 +1,9 @@
 <?php
 session_start();
 $legal = 0;
-require_once 'config/doctrine.php';
 require_once 'vendor/autoload.php';
+$b = new \App\Config();
+$em = $b -> getEntityManager();
 $probe = null;
 $userRepository = $em -> getRepository(\App\Entity\User::class);
 $probe = $userRepository->findBy(['email' => $_POST['email']]);

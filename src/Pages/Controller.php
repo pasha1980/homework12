@@ -3,7 +3,6 @@
 
 namespace App\Pages;
 
-
 use App\Entity\Post;
 use App\Entity\User;
 
@@ -11,7 +10,8 @@ class Controller
 {
     public function postsCount(int $id) :int
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $postRepository = $em -> getRepository(Post::class);
         $posts = $postRepository -> findAll();
         $count = 0;
@@ -27,7 +27,8 @@ class Controller
 
     public function title(int $post_id) :string
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $postRepository = $em -> getRepository(Post::class);
         $posts = $postRepository -> findBy(['id' => $post_id]);
         $title = $posts[0] -> getTitle();
@@ -36,7 +37,8 @@ class Controller
 
     public function text(int $post_id) :string
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $postRepository = $em -> getRepository(Post::class);
         $posts = $postRepository -> findBy(['id' => $post_id]);
         $text = $posts[0] -> getText();
@@ -46,7 +48,8 @@ class Controller
     public function legacy(int $post_id) :bool
     {
         session_start();
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $legal = false;
         if ($_SESSION['legal'] == 1){
             $postRep = $em -> getRepository(Post::class);
@@ -64,7 +67,8 @@ class Controller
 
     public function isExist (int $id, string $who) :bool
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $isExist = false;
         if ($who == 'post'){
             $postRep = $em -> getRepository(Post::class);
@@ -84,7 +88,8 @@ class Controller
 
     public function whosePost (int $post_id) :string
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $postRep = $em -> getRepository(Post::class);
         $userRep = $em -> getRepository(User::class);
         $posts = $postRep -> find($post_id);
@@ -97,7 +102,8 @@ class Controller
 
     public function getUser(int $id) :?array
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $isExist = $this ->isExist($id, 'user');
         if ($isExist){
             $userRep = $em -> getRepository(User::class);
@@ -112,7 +118,8 @@ class Controller
 
     public function getPostData() :array
     {
-        require 'config/doctrine.php';
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
         $data = [];
         $postRep = $em -> getRepository(Post::class);
         $posts = $postRep -> findAll();

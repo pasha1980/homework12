@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'config/doctrine.php';
 require_once 'vendor/autoload.php';
+$b = new \App\Config();
+$em = $b -> getEntityManager();
 $title = $_POST['title'];
 $text = $_POST['text'];
 

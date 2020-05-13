@@ -4,6 +4,7 @@
 namespace App\Pages;
 
 
+use App\Config;
 use App\Entity\Post;
 use App\Entity\User;
 
@@ -11,7 +12,8 @@ class Pages
 {
     public function home() {
         session_start();
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         if (isset($_SESSION['id'])){
             $legal = 1;
             $id = $_SESSION['id'];
@@ -26,7 +28,8 @@ class Pages
         ]);
     }
     public function authorization(?string $warning) {
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         echo $twig -> render('user_registration.html.twig', [
             'title' => '- Авторизация',
             'warning' => $warning,
@@ -35,7 +38,8 @@ class Pages
 
     public function showUser($id) {
         session_start();
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         $a = new Controller();
         $user = $a -> getUser($id);
         $postsCount = $a ->postsCount($id);
@@ -69,7 +73,8 @@ class Pages
     }
 
     public function registration (?string $warning) {
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         echo $twig -> render('user_registration.html.twig', [
            'title' => '- Регистриция',
            'warning' => $warning,
@@ -83,8 +88,9 @@ class Pages
         } else {
             $legal = 0;
         }
-        require_once 'config/twig.php';
-        require 'config/doctrine.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
+        $em = $c -> getEntityManager();
 
         $userRep = $em -> getRepository(User::class);
         $user = $userRep -> find($id);
@@ -100,7 +106,7 @@ class Pages
         }
         $i = ($page - 1) * 3;
         $b = ((count($data))/3) - 1;
-        $pageCount = ceil($b);
+        $pageCount = (ceil($b));
         if (($pageCount-$b)<(1/2) && ($pageCount-$b) != 0){
             $leavePosts = 2;
         } elseif (($pageCount-$b)>(1/2)){
@@ -131,7 +137,8 @@ class Pages
 
     public function createPost (int $warning) {
         session_start();
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         if (isset($_SESSION['id']) && $_SESSION['legal'] == 1 ) {
             echo $twig -> render ('post_create.html.twig', [
                 'title' => '- Создание поста',
@@ -151,7 +158,8 @@ class Pages
         } else {
             $legal = 0;
         }
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         $a = new Controller();
         $isPostExist = $a ->isExist($post_id, 'post');
         if ($isPostExist){
@@ -197,7 +205,8 @@ class Pages
         } else {
             $legal = 0;
         }
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         $a = new Controller();
         $data = $a -> getPostData();
         $i = ($page - 1) * 3;
@@ -234,7 +243,8 @@ class Pages
     }
 
     public function notFound () {
-        require_once 'config/twig.php';
+        $c = new Config();
+        $twig = $c -> getTwig();
         echo $twig -> render ('page404.html.twig', [
             'title' => '- Страница не найдена',
         ]);
