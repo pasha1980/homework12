@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Блог Пашки-Черепашки {{ title }} </title>
+</head>
+<body>
+    <header>
+        {% block head %}
+            {% if legal == 0 %}
+                <a href="/posts"> Все посты </a> <br>
+                <a href="/authorization"> Авторизоваться </a> <br>
+                <a href="/registration"> Зарегистрироваться </a> <br>
+            {% else %}
+                <a href="/create">Перейти к созданию поста</a> <br>
+                <a href="/user/{{ id }}/posts">Посмотреть список моих постов</a> <br>
+                <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
+            {% endif %}
+        {% endblock %}
+    </header>
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

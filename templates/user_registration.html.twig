@@ -1,0 +1,13 @@
+{% extends "index.html.twig" %}
+{% block head %}
+{% endblock %}
+{% block main %}
+    {{ warning }}
+    <form action="registration.php" method="post">
+        Имя: <input name="name" required> <br>
+        Email: <input name="email" required> <br>
+        Пароль: <input type="password" name="password1" required> <br>
+        Повторите пароль: <input type="password" name="password2" required> <br>
+        <input type="submit" name="sub" value="Зарегистрироваться">
+    </form>
+{% endblock %}

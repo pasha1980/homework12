@@ -1,0 +1,11 @@
+{% extends "index.html.twig" %}
+{% block head %}
+{% endblock %}
+{% block main %}
+    {{ warning }}
+    <form action="authorization.php" method="post">
+        Email: <input name="email"> <br>
+        Пароль: <input type="password" name="password"> <br>
+        <input type="submit" name="sub" value="Авторизоваться">
+    </form>
+{% endblock %}
