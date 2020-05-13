@@ -1,11 +1,24 @@
 {% extends "index.html.twig" %}
 {% block head %}
+    <a href="/posts/1"> Все посты </a> <br>
 {% endblock %}
 {% block main %}
-    Ваше имя: {{ name }} <br>
-    Ваш email: {{ email }} <br>
-    Количество ваших постов: {{ postCount }} <br>
+    {% if exist == 1 %}
+        {% if legal == 1 %}
+            Ваше имя: {{ name }} <br>
+            Ваш email: {{ email }} <br>
+            Количество ваших постов: {{ postCount }} <br>
 
-    <a href="/create">Создать пост</a> <br>
-    <a href="{{ id }}/posts">Ваши посты</a>
+            <a href="/create">Создать пост</a> <br>
+            <a href="{{ id }}/posts/1">Ваши посты</a>
+        {% else %}
+            Имя пользователя: {{ name }} <br>
+            Email пользователя: {{ email }} <br>
+            Количество постов: {{ postCount }} <br>
+
+            <a href="{{ id }}/posts">Посты {{ name }}</a>
+        {% endif %}
+    {% else %}
+        Извините, такого пользователя не существует.
+    {% endif %}
 {% endblock %}

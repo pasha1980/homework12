@@ -1,6 +1,81 @@
 {% extends "index.html.twig" %}
 {% block head %}
+    {% if legal == 0 %}
+        <a href="/authorization"> Авторизоваться </a> <br>
+        <a href="/registration"> Зарегистрироваться </a> <br>
+    {% else %}
+        <a href="/create">Перейти к созданию поста</a> <br>
+        <a href="/user/{{ id }}/posts">Посмотреть список моих постов</a> <br>
+        <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
+    {% endif %}
 {% endblock %}
 {% block main %}
-    USERS POSTS
+    {% if pageCount > page %}
+        Все посты <br>
+        <hr>
+        <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
+        Название: {{ postTitle1 }} <br>
+        {{ text1 }}<br>
+        <hr>
+
+        <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
+        Название: {{ postTitle2 }} <br>
+        {{ text2 }}<br>
+        <hr>
+
+        <a href="/post/{{ id3 }}"> Пост {{ id3 }} </a>: <br>
+        Название: {{ postTitle3 }} <br>
+        {{ text3 }}<br>
+        <hr>
+        {% if page == 1 %}
+            <a href="/user/{{ id }}/posts/{{ next }}">Перейти на следующую страницу</a>
+        {% else %}
+            <a href="/user/{{ id }}/posts/{{ next }}">Перейти на следующую страницу</a> <br>
+            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+        {% endif %}
+    {% elseif page == pageCount %}
+        {% if postsToLeave == 1 %}
+            Ваши посты <br>
+            <hr>
+            <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
+            Название: {{ postTitle1 }} <br>
+            {{ text1 }}<br>
+            <hr>
+            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+        {% elseif postsToLeave == 2 %}
+            Ваши посты <br>
+            <hr>
+            <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
+            Название: {{ postTitle1 }} <br>
+            {{ text1 }}<br>
+            <hr>
+
+            <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
+            Название: {{ postTitle2 }} <br>
+            {{ text2 }}<br>
+            <hr>
+            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+        {% elseif postsToLeave == 3 %}
+            ваши посты <br>
+            <hr>
+            <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
+            Название: {{ postTitle1 }} <br>
+            {{ text1 }}<br>
+            <hr>
+
+            <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
+            Название: {{ postTitle2 }} <br>
+            {{ text2 }}<br>
+            <hr>
+
+            <a href="/post/{{ id3 }}"> Пост {{ id3 }} </a>: <br>
+            Название: {{ postTitle3 }} <br>
+            {{ text3 }}<br>
+            <hr>
+            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+        {% endif %}
+    {% elseif page > pageCount %}
+        Такой страницы нет
+    {% endif %}
+
 {% endblock %}

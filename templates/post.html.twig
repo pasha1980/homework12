@@ -5,17 +5,25 @@
         <a href="/authorization"> Авторизоваться </a> <br>
         <a href="/registration"> Зарегистрироваться </a> <br>
     {% else %}
+        <a href="/posts"> Все посты </a> <br>
         <a href="/create">Перейти к созданию поста</a> <br>
         <a href="/user/{{ id }}/posts">Посмотреть список моих постов</a> <br>
         <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
     {% endif %}
 {% endblock %}
 {% block main %}
-    title : {{ postTitle }} <br>
-    text : {{ postText }} <br>
-    {% if legal == 1  %}
-        <form action="/delete.php" method="post">
-            <input type="submit" name="{{ id }}" value="DELETE">
-        </form>
+    {% if isPostExist == true %}
+        title : {{ postTitle }} <br>
+        text : {{ postText }} <br>
+        {% if legalToDelete == true %}
+            Это ваш пост <br>
+            <form action="/delete.php" method="post">
+                <input type="submit" name="{{ postId }}" value="DELETE">
+            </form>
+        {% else %}
+            Этот пост принадлежит пользователю {{ username }}. Вы не можете его удалить.
+        {% endif %}
+    {% else %}
+        Извините, но такого поста не существует
     {% endif %}
 {% endblock %}

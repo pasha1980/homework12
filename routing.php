@@ -3,10 +3,10 @@ require_once 'vendor/autoload.php';
 
 $klein = new \Klein\Klein();
 $map = [
-    '/^posts$/',
+    '/posts\/[\d+]/',
     '/post\/[\d+]/',
     '/user\/[\d+]/',
-    '/user\/[\d+]\/\posts/',
+    '/user\/[\d+]\/\posts\/[\d+]/',
     '/^create$/',
     '/^authorization$/',
     '/^registration$/',
@@ -21,24 +21,25 @@ for ($i = 0; $i < count($map); $i++){   // ?????
 
 if ($a) {
 
-    $klein->respond('GET', '/posts', function () {
+    $klein->respond('GET', '/posts/[:page]', function ($page) {
         $a = new App\Pages\Pages();
-        $a -> showAllPosts();
+        $a -> showAllPosts($page->page);
     });
 
-    $klein->respond( 'GET', '/post/[i:id]', function ($id) {
+    $klein->respond( 'GET', '/post/[:id]', function ($id) {
         $a = new \App\Pages\Pages();
         $a -> showOnePost($id->id);
     });
 
     $klein->respond( 'GET', '/user/[:id]', function ($id) {
         $a = new \App\Pages\Pages();
-        $a -> showUser();
+        $a -> showUser($id->id);
     });
 
-    $klein->respond( 'GET', '/user/[:id]/posts', function () {
+    $klein->respond( 'GET', '/user/[i:id]/posts/[i]', function ($id) {
         $a = new \App\Pages\Pages();
-        $a -> usersPosts();
+
+        $a -> usersPosts($id->id);
     });
 
     $klein->respond( 'GET', '/authorization', function () {
