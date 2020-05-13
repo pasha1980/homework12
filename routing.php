@@ -3,10 +3,10 @@ require_once 'vendor/autoload.php';
 
 $klein = new \Klein\Klein();
 $map = [
-    '/posts\/[\d+]/',
-    '/post\/[\d+]/',
-    '/user\/[\d+]/',
-    '/user\/[\d+]\/\posts\/[\d+]/',
+    '/posts\/[0-9]/',
+    '/post\/[0-9]/',
+    '/user\/[0-9]/',
+    '/user\/[0-9]\/\posts\/[0-9]/',
     '/^create$/',
     '/^authorization$/',
     '/^registration$/',
@@ -36,10 +36,9 @@ if ($a) {
         $a -> showUser($id->id);
     });
 
-    $klein->respond( 'GET', '/user/[i:id]/posts/[i]', function ($id) {
+    $klein->respond( 'GET', '/user/[i:id]/posts/[i:page]', function ($id) {
         $a = new \App\Pages\Pages();
-
-        $a -> usersPosts($id->id);
+        $a -> usersPosts($id->id, $id->page);
     });
 
     $klein->respond( 'GET', '/authorization', function () {

@@ -11,7 +11,7 @@
 {% endblock %}
 {% block main %}
     {% if pageCount > page %}
-        Все посты <br>
+        Ваши посты <br>
         <hr>
         <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
         Название: {{ postTitle1 }} <br>
@@ -56,7 +56,7 @@
             <hr>
             <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
         {% elseif postsToLeave == 3 %}
-            ваши посты <br>
+            Ваши посты <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
             Название: {{ postTitle1 }} <br>

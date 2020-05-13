@@ -76,11 +76,8 @@ class Pages
         ]);
     }
 
-    public function usersPosts (int $id) {
+    public function usersPosts (int $id, int $page) {
         session_start();
-
-        $page =1;
-
         if (isset($_SESSION['id'])){
             $legal = 1;
         } else {
@@ -102,7 +99,7 @@ class Pages
             }
         }
         $i = ($page - 1) * 3;
-        $b = ((count($data))/3);
+        $b = ((count($data))/3) - 1;
         $pageCount = ceil($b);
         if (($pageCount-$b)<(1/2) && ($pageCount-$b) != 0){
             $leavePosts = 2;
