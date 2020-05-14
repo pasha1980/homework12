@@ -48,7 +48,7 @@ if ($a) {
 
     $klein->respond( 'GET', '/registration', function () {
         $a = new \App\Pages\Pages();
-        $a -> registration(null);
+        $a -> registration('');
     });
 
     $klein->respond( 'GET', '/create', function () {

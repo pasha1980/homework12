@@ -30,7 +30,7 @@ class Pages
     public function authorization(?string $warning) {
         $c = new Config();
         $twig = $c -> getTwig();
-        echo $twig -> render('user_registration.html.twig', [
+        echo $twig -> render('user_authorization.html.twig', [
             'title' => '- Авторизация',
             'warning' => $warning,
         ]);
@@ -105,7 +105,7 @@ class Pages
             }
         }
         $i = ($page - 1) * 3;
-        $b = ((count($data))/3) - 1;
+        $b = ((count($usersPosts))/3);
         $pageCount = (ceil($b));
         if (($pageCount-$b)<(1/2) && ($pageCount-$b) != 0){
             $leavePosts = 2;

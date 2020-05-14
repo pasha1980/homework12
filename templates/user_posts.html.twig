@@ -5,7 +5,6 @@
         <a href="/registration"> Зарегистрироваться </a> <br>
     {% else %}
         <a href="/create">Перейти к созданию поста</a> <br>
-        <a href="/user/{{ id }}/posts">Посмотреть список моих постов</a> <br>
         <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
     {% endif %}
 {% endblock %}
@@ -41,7 +40,11 @@
             Название: {{ postTitle1 }} <br>
             {{ text1 }}<br>
             <hr>
-            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% if page == 1 %}
+                Это единственая страница.
+            {% else %}
+                <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% endif %}
         {% elseif postsToLeave == 2 %}
             Ваши посты <br>
             <hr>
@@ -54,7 +57,11 @@
             Название: {{ postTitle2 }} <br>
             {{ text2 }}<br>
             <hr>
-            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% if page == 1 %}
+                Это единственая страница.
+            {% else %}
+                <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% endif %}
         {% elseif postsToLeave == 3 %}
             Ваши посты <br>
             <hr>
@@ -72,7 +79,11 @@
             Название: {{ postTitle3 }} <br>
             {{ text3 }}<br>
             <hr>
-            <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% if page == 1 %}
+                Это единственая страница.
+            {% else %}
+                <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% endif %}
         {% endif %}
     {% elseif page > pageCount %}
         Такой страницы нет
