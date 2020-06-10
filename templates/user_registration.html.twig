@@ -1,13 +1,30 @@
 {% extends "index.html.twig" %}
-{% block head %}
-{% endblock %}
 {% block main %}
-    {{ warning }}
+    <h2>Регистрация</h2><br>
+    {% if warning == '' %}
+    {% else %}
+    <div class="alert alert-danger">
+        {{ warning }}
+    </div>
+    {% endif %}
     <form action="registration.php" method="post">
-        Имя: <input name="name" required> <br>
-        Email: <input name="email" required> <br>
-        Пароль: <input type="password" name="password1" required> <br>
-        Повторите пароль: <input type="password" name="password2" required> <br>
-        <input type="submit" name="sub" value="Зарегистрироваться">
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input name="name" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="password1">Пароль</label>
+            <input name="password1" type="password" class="form-control" id="password1">
+        </div>
+        <div class="form-group">
+            <label for="password2">Подтвердите пароль</label>
+            <input name="password2" type="password" class="form-control" id="password2">
+        </div>
+{#        <button type="submit" name="sub" value="Зарегистрироваться" class="btn btn-primary">Register</button>#}
+        <input class="btn btn-primary" type="submit" name="sub" value="Registrate">
     </form>
 {% endblock %}

@@ -1,29 +1,19 @@
 {% extends "index.html.twig" %}
-{% block head %}
-    {% if legal == 0 %}
-        <a href="/authorization"> Авторизоваться </a> <br>
-        <a href="/registration"> Зарегистрироваться </a> <br>
-    {% else %}
-        <a href="/create">Перейти к созданию поста</a> <br>
-        <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
-    {% endif %}
-{% endblock %}
 {% block main %}
     {% if pageCount > page %}
-        Ваши посты <br>
+        <h2>Ваши посты:</h2> <br>
         <hr>
         <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-        Название: {{ postTitle1 }} <br>
-        {{ text1 }}<br>
+        {{ postTitle1 }} <br>
         <hr>
 
         <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
-        Название: {{ postTitle2 }} <br>
+        {{ postTitle2 }} <br>
         {{ text2 }}<br>
         <hr>
 
         <a href="/post/{{ id3 }}"> Пост {{ id3 }} </a>: <br>
-        Название: {{ postTitle3 }} <br>
+        {{ postTitle3 }} <br>
         {{ text3 }}<br>
         <hr>
         {% if page == 1 %}
@@ -34,53 +24,53 @@
         {% endif %}
     {% elseif page == pageCount %}
         {% if postsToLeave == 1 %}
-            Ваши посты <br>
+            <h2>Ваши посты:</h2> <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-            Название: {{ postTitle1 }} <br>
+            {{ postTitle1 }} <br>
             {{ text1 }}<br>
             <hr>
             {% if page == 1 %}
-                Это единственая страница.
+                *это единственая страница.
             {% else %}
                 <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
             {% endif %}
         {% elseif postsToLeave == 2 %}
-            Ваши посты <br>
+            <h2>Ваши посты:</h2> <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-            Название: {{ postTitle1 }} <br>
+            {{ postTitle1 }} <br>
             {{ text1 }}<br>
             <hr>
 
             <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
-            Название: {{ postTitle2 }} <br>
+            {{ postTitle2 }} <br>
             {{ text2 }}<br>
             <hr>
             {% if page == 1 %}
-                Это единственая страница.
+                *это единственая страница.
             {% else %}
                 <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
             {% endif %}
         {% elseif postsToLeave == 3 %}
-            Ваши посты <br>
+            <h2>Ваши посты:</h2> <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-            Название: {{ postTitle1 }} <br>
+            {{ postTitle1 }} <br>
             {{ text1 }}<br>
             <hr>
 
             <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
-            Название: {{ postTitle2 }} <br>
+            {{ postTitle2 }} <br>
             {{ text2 }}<br>
             <hr>
 
             <a href="/post/{{ id3 }}"> Пост {{ id3 }} </a>: <br>
-            Название: {{ postTitle3 }} <br>
+            {{ postTitle3 }} <br>
             {{ text3 }}<br>
             <hr>
             {% if page == 1 %}
-                Это единственая страница.
+                *это единственая страница.
             {% else %}
                 <a href="/user/{{ id }}/posts/{{ previous }}">Перейти на предыдущую страницу</a>
             {% endif %}

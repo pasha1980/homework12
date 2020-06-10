@@ -139,4 +139,15 @@ class Controller
         return $data;
     }
 
+    public function ownerId($post_id) :int
+    {
+        $b = new \App\Config();
+        $em = $b -> getEntityManager();
+        $postRep = $em -> getRepository(Post::class);
+        $posts = $postRep -> find($post_id);
+        $user1 = $posts -> getUsers();
+        $user_id = $user1 -> getId();
+        return $user_id;
+    }
+
 }

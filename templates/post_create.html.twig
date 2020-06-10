@@ -1,19 +1,28 @@
 {% extends "index.html.twig" %}
-{% block head %}
-{% endblock %}
 {% block main %}
+    <h2>Создание поста</h2>
     {% if warning == 0 %}
-        Пожалуйста, напишите ваш пост.
     {% elseif warning == 1 %}
-        Пост опубликован. <br> <a href='user/{{ id }}'>Вернуться на домашнюю страницу</a>
+        {% if warning == '' %}
+        {% else %}
+            <div class="alert alert-primary" role="alert">
+                Пост опубликован. <br> <a class="nav-link" href='user/{{ id }}'>Вернуться на домашнюю страницу</a>
+            </div>
+        {% endif %}
     {% else %}
-        Пост с таким названием уже существует. Пожалуйста, придумайте другое название.
+        <div class="alert alert-danger" role="alert">
+            Пост с таким названием уже существует. Пожалуйста, придумайте другое название.
+        </div>
     {% endif %}
     <form action="createPost.php" method="post">
-        Заголовок: <br>
-        <input name="title"><br>
-        Текст поста: <br>
-        <textarea name="text" cols="150" rows="30"></textarea> <br>
-        <input type="submit" value="Опубликовать" name="sub">
+        <div class="form-group">
+            <label for="title">Название</label>
+            <input name="title" class="form-control" id="title">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Текст</label>
+            <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="20"></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" name="sub" value="Publish">
     </form>
 {% endblock %}

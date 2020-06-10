@@ -1,33 +1,20 @@
 {% extends "index.html.twig" %}
-{% block head %}
-    {% if legal == 0 %}
-        <a href="/authorization"> Авторизоваться </a> <br>
-        <a href="/registration"> Зарегистрироваться </a> <br>
-    {% else %}
-        <a href="/create">Перейти к созданию поста</a> <br>
-        <a href="/user/{{ id }}/posts">Посмотреть список моих постов</a> <br>
-        <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
-    {% endif %}
-{% endblock %}
 {% block main %}
     {% if pageCount > page %}
-        Все посты <br>
+        <h2>Все посты</h2> <br>
         <hr>
         <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-        Название: {{ postTitle1 }} <br>
-        {{ text1 }}<br>
+        {{ postTitle1 }} <br>
         Написал: {{ username1 }}
         <hr>
 
         <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
-        Название: {{ postTitle2 }} <br>
-        {{ text2 }}<br>
+        {{ postTitle2 }} <br>
         Написал: {{ username2 }}
         <hr>
 
         <a href="/post/{{ id3 }}"> Пост {{ id3 }} </a>: <br>
-        Название: {{ postTitle3 }} <br>
-        {{ text3 }}<br>
+        {{ postTitle3 }} <br>
         Написал: {{ username3 }}
         <hr>
         {% if page == 1 %}
@@ -38,53 +25,59 @@
         {% endif %}
     {% elseif page == pageCount %}
         {% if postsToLeave == 1 %}
-            Все посты <br>
+            <h2>Все посты</h2> <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-            Название: {{ postTitle1 }} <br>
-            {{ text1 }}<br>
+            {{ postTitle1 }} <br>
             Написал: {{ username1 }}
             <hr>
-            <a href="/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% if page == 1 %}
+                *это единственная страница
+            {% else %}
+                <a href="/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% endif %}
         {% elseif postsToLeave == 2 %}
-            Все посты <br>
+            <h2>Все посты</h2> <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-            Название: {{ postTitle1 }} <br>
-            {{ text1 }}<br>
+            {{ postTitle1 }} <br>
             Написал: {{ username1 }}
             <hr>
 
             <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
-            Название: {{ postTitle2 }} <br>
-            {{ text2 }}<br>
+            {{ postTitle2 }} <br>
             Написал: {{ username2 }}
             <hr>
-            <a href="/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% if page == 1 %}
+                *это единственная страница
+            {% else %}
+                <a href="/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% endif %}
         {% elseif postsToLeave == 3 %}
-            Все посты <br>
+            <h1>Все посты</h1> <br>
             <hr>
             <a href="/post/{{ id1 }}"> Пост {{ id1 }} </a>: <br>
-            Название: {{ postTitle1 }} <br>
-            {{ text1 }}<br>
+            {{ postTitle1 }} <br>
             Написал: {{ username1 }}
             <hr>
 
             <a href="/post/{{ id2 }}"> Пост {{ id2 }} </a>: <br>
-            Название: {{ postTitle2 }} <br>
-            {{ text2 }}<br>
+            {{ postTitle2 }} <br>
             Написал: {{ username2 }}
             <hr>
 
             <a href="/post/{{ id3 }}"> Пост {{ id3 }} </a>: <br>
-            Название: {{ postTitle3 }} <br>
-            {{ text3 }}<br>
+            {{ postTitle3 }} <br>
             Написал: {{ username3 }}
             <hr>
-            <a href="/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% if page == 1 %}
+                *это единственная страница
+            {% else %}
+                <a href="/posts/{{ previous }}">Перейти на предыдущую страницу</a>
+            {% endif %}
             {% endif %}
     {% elseif page > pageCount %}
-    Такой страницы нет
+        <h1 style="color: crimson;">Такой страницы нет</h1>
     {% endif %}
 
 {% endblock %}

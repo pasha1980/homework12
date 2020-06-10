@@ -144,6 +144,7 @@ class Pages
                 'title' => '- Создание поста',
                 'warning' => $warning,
                 'id' => $_SESSION['id'],
+                'legal' => 1,
             ]);
 
         } else {
@@ -167,6 +168,7 @@ class Pages
             $text = $a -> text($post_id);
             $legacy = $a -> legacy($post_id);
             $whose = $a -> whosePost ($post_id);
+            $owner_id = $a ->ownerId ($post_id);
             echo $twig -> render ('post.html.twig', [
                 'title' => '- Пост',
                 'legal' => $legal,
@@ -177,12 +179,14 @@ class Pages
                 'legalToDelete' => $legacy,
                 'isPostExist' => true,
                 'username' => $whose,
+                'ownerId' => $owner_id,
             ]);
         } else {
             $title = '';
             $text = '';
             $legacy = false;
             $whose = '';
+            $owner_id = null;
             echo $twig -> render ('post.html.twig', [
                 'title' => '- Пост',
                 'legal' => $legal,
@@ -193,6 +197,7 @@ class Pages
                 'legalToDelete' => $legacy,
                 'isPostExist' => false,
                 'username' => $whose,
+                'ownerId' => $owner_id,
              ]);
         }
 
@@ -239,6 +244,7 @@ class Pages
             'page' => $page,
             'pageCount' => $pageCount,
             'postsToLeave' => $leavePosts,
+            'id' => $_SESSION['id'],
         ]);
     }
 

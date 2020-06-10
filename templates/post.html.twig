@@ -1,29 +1,23 @@
 {% extends "index.html.twig" %}
-{% block head %}
-    {% if legal == 0 %}
-        <a href="/posts"> Все посты </a> <br>
-        <a href="/authorization"> Авторизоваться </a> <br>
-        <a href="/registration"> Зарегистрироваться </a> <br>
-    {% else %}
-        <a href="/posts"> Все посты </a> <br>
-        <a href="/create">Перейти к созданию поста</a> <br>
-        <a href="/user/{{ id }}/posts">Посмотреть список моих постов</a> <br>
-        <a href="/user/{{ id }}">Перейти на мою страничку</a><br>
-    {% endif %}
-{% endblock %}
 {% block main %}
     {% if isPostExist == true %}
-        title : {{ postTitle }} <br>
-        text : {{ postText }} <br>
+        <h3>{{ postTitle }}</h3>
+        {{ postText }} <br>
         {% if legalToDelete == true %}
-            Это ваш пост <br>
+            <div class="alert alert-success" role="alert">
+                Это ваш пост
+            </div>
             <form action="/delete.php" method="post">
-                <input type="submit" name="{{ postId }}" value="DELETE">
+                <input class="btn btn-danger" type="submit" name="{{ postId }}" value="DELETE">
             </form>
         {% else %}
-            Этот пост принадлежит пользователю {{ username }}. Вы не можете его удалить.
+            <div class="alert alert-secondary" role="alert">
+                Этот пост принадлежит пользователю <a href="/user/{{ ownerId }}">{{ username }}</a>. Вы не можете его удалить.
+            </div>
         {% endif %}
     {% else %}
-        Извините, но такого поста не существует
+        <div class="alert alert-danger" role="alert">
+            Извините, но такого поста не существует
+        </div>
     {% endif %}
 {% endblock %}
