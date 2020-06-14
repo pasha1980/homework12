@@ -40,8 +40,9 @@ class Pages
         session_start();
         $c = new Config();
         $twig = $c -> getTwig();
+        $em = $c -> getEntityManager();
         $a = new Controller();
-        $user = $a -> getUser($id);
+        $user = $em -> getRepository(User::class) -> find($id);
         $postsCount = $a ->postsCount($id);
         if (isset($user)) {
             $exist = 1;
@@ -52,22 +53,20 @@ class Pages
             $postsCount = $a ->postsCount($id);
             echo $twig -> render('user.html.twig', [
                 'title' => '- Пользователь',
-                'name' => $_SESSION['name'],
-                'email' => $_SESSION['email'],
                 'postCount' => $postsCount,
                 'id' => $id,
                 'legal' => 1,
                 'exist' => $exist,
+                'user' => $user,
             ]);
         } else {
             echo $twig -> render('user.html.twig', [
                 'title' => '- Пользователь',
-                'name' => $user['name'],
-                'email' => $user['email'],
                 'postCount' => $postsCount,
                 'id' => $id,
                 'legal' => 0,
                 'exist' => $exist,
+                'user' => $user,
             ]);
         }
     }
@@ -92,8 +91,7 @@ class Pages
         $twig = $c -> getTwig();
         $em = $c -> getEntityManager();
 
-        $userRep = $em -> getRepository(User::class);
-        $user = $userRep -> find($id);
+        $user = $em -> getRepository(User::class) -> find($id);
         $username = $user -> getName();
 
         $a = new Controller();
@@ -161,43 +159,32 @@ class Pages
         }
         $c = new Config();
         $twig = $c -> getTwig();
+        $em = $c -> getEntityManager();
+        $post = $em -> getRepository(Post::class) -> find($post_id);
         $a = new Controller();
         $isPostExist = $a ->isExist($post_id, 'post');
         if ($isPostExist){
-            $title = $a -> title($post_id);
-            $text = $a -> text($post_id);
             $legacy = $a -> legacy($post_id);
             $whose = $a -> whosePost ($post_id);
-            $owner_id = $a ->ownerId ($post_id);
             echo $twig -> render ('post.html.twig', [
+                'post' => $post,
                 'title' => '- Пост',
                 'legal' => $legal,
-                'postTitle' => $title,
-                'postText' => $text,
                 'id' => $_SESSION['id'],
-                'postId' => $post_id,
                 'legalToDelete' => $legacy,
                 'isPostExist' => true,
                 'username' => $whose,
-                'ownerId' => $owner_id,
             ]);
         } else {
-            $title = '';
-            $text = '';
             $legacy = false;
             $whose = '';
-            $owner_id = null;
             echo $twig -> render ('post.html.twig', [
                 'title' => '- Пост',
                 'legal' => $legal,
-                'postTitle' => $title,
-                'postText' => $text,
                 'id' => $_SESSION['id'],
-                'postId' => $post_id,
                 'legalToDelete' => $legacy,
                 'isPostExist' => false,
                 'username' => $whose,
-                'ownerId' => $owner_id,
              ]);
         }
 

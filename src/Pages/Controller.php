@@ -8,6 +8,7 @@ use App\Entity\User;
 
 class Controller
 {
+
     public function postsCount(int $id) :int
     {
         $b = new \App\Config();
@@ -23,26 +24,6 @@ class Controller
             }
         }
         return $count;
-    }
-
-    public function title(int $post_id) :string
-    {
-        $b = new \App\Config();
-        $em = $b -> getEntityManager();
-        $postRepository = $em -> getRepository(Post::class);
-        $posts = $postRepository -> findBy(['id' => $post_id]);
-        $title = $posts[0] -> getTitle();
-        return $title;
-    }
-
-    public function text(int $post_id) :string
-    {
-        $b = new \App\Config();
-        $em = $b -> getEntityManager();
-        $postRepository = $em -> getRepository(Post::class);
-        $posts = $postRepository -> findBy(['id' => $post_id]);
-        $text = $posts[0] -> getText();
-        return $text;
     }
 
     public function legacy(int $post_id) :bool
@@ -100,22 +81,6 @@ class Controller
         return $username;
     }
 
-    public function getUser(int $id) :?array
-    {
-        $b = new \App\Config();
-        $em = $b -> getEntityManager();
-        $isExist = $this ->isExist($id, 'user');
-        if ($isExist){
-            $userRep = $em -> getRepository(User::class);
-            $users = $userRep -> find($id);
-            $user['name'] = $users -> getName();
-            $user['email'] = $users -> getEmail();
-        } else {
-            $user = null;
-        }
-        return $user;
-    }
-
     public function getPostData() :array
     {
         $b = new \App\Config();
@@ -137,17 +102,6 @@ class Controller
             array_push($data, $inter);
         }
         return $data;
-    }
-
-    public function ownerId($post_id) :int
-    {
-        $b = new \App\Config();
-        $em = $b -> getEntityManager();
-        $postRep = $em -> getRepository(Post::class);
-        $posts = $postRep -> find($post_id);
-        $user1 = $posts -> getUsers();
-        $user_id = $user1 -> getId();
-        return $user_id;
     }
 
 }

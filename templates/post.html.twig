@@ -1,18 +1,18 @@
 {% extends "index.html.twig" %}
 {% block main %}
     {% if isPostExist == true %}
-        <h3>{{ postTitle }}</h3>
-        {{ postText }} <br>
+        <h3>{{ post.title }}</h3>
+        {{ post.text }} <br>
         {% if legalToDelete == true %}
             <div class="alert alert-success" role="alert">
                 Это ваш пост
             </div>
             <form action="/delete.php" method="post">
-                <input class="btn btn-danger" type="submit" name="{{ postId }}" value="DELETE">
+                <input class="btn btn-danger" type="submit" name="{{ post.id }}" value="DELETE">
             </form>
         {% else %}
             <div class="alert alert-secondary" role="alert">
-                Этот пост принадлежит пользователю <a href="/user/{{ ownerId }}">{{ username }}</a>. Вы не можете его удалить.
+                Этот пост принадлежит пользователю <a href="/user/{{ post.users.id }}">{{ username }}</a>. Вы не можете его удалить.
             </div>
         {% endif %}
     {% else %}

@@ -13,7 +13,7 @@ services:
     image: mysql:5.7.28
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - 3306:3306
+      - 33067:3306
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=0p;/9ol.8ik,
